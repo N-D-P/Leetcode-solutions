@@ -5,31 +5,34 @@ using namespace std;
 // } Driver Code Ends
 class Solution
 {
-    private:
-    void dfs(int node, vector<int> adj[], vector<int> &vis, stack<int> &stk) {
-        vis[node] = 1;
-        for(int i: adj[node]) {
-            if(!vis[i])
-                dfs(i,adj,vis,stk);
-        }
-        stk.push(node);
-    }
 	public:
 	//Function to return list containing vertices in Topological order. 
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
-	    // code here
-	    stack<int> stk;
-	    vector<int> vis(V);
+	    // Kahn's Algo, topological sort using bfs
+	    vector<int> indegree(V);
+	    queue<int> q;
 	    vector<int> ans;
+	    for(int i=0; i<V; i++) 
+	        for(int j : adj[i]) 
+	            indegree[j]++;
+	    
 	    for(int i=0; i<V; i++)
-	        if(!vis[i])
-	            dfs(i,adj,vis,stk);
-	   while(!stk.empty()) {
-	       ans.push_back(stk.top());
-	       stk.pop();
-	   }
-	   return ans;
+	        if(indegree[i] == 0)
+	            q.push(i);
+	    
+	    while(!q.empty()) {
+	        int topEle = q.front();
+	        q.pop();
+	        ans.push_back(topEle);
+	        for(int i : adj[topEle]) {
+	            indegree[i]--;
+	            if(indegree[i] == 0)
+	                q.push(i);
+	        }
+	    }
+	    
+	    return ans;
 	}
 };
 
