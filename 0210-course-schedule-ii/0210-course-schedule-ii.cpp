@@ -29,7 +29,6 @@ public:
                     q.push(i);
             }
         }
-        vector<int> a;
-        return cnt == V ? ans : a;
+        return cnt == V ? ans : vector<int> ();
     }
 };
