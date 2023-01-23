@@ -1,42 +1,39 @@
 class Solution {
 public:
-    bool dfs(int node, vector<vector<int>>& graph, vector<int> &vis,vector<int> &pvis,vector<int> &safe) {
-        vis[node] = 1;
-        pvis[node] = 1;
-        for(int i : graph[node]) {
-            if(pvis[i] == 0) {
-                if(vis[i] == 0 and dfs(i,graph,vis,pvis,safe) == true)
-                    return true;
-            }
-            else
-                return true;
-        }
-        pvis[node] = 0;
-        safe[node] = 1;
-        return false;
-        
-    }
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        int v = graph.size();
-        vector<int> vis(v);
-        vector<int> pvis(v);
-        vector<int> safe(v);
+        int V = graph.size();
+        //reverse all the edges
+        vector<vector<int>> revGrh(V);
+        for(int i=0; i<V; i++) 
+            for(int x : graph[i])
+                revGrh[x].push_back(i);
+        
+        vector<int> indgre(V);
+        
+        for(int i=0; i<V; i++)
+            for(int x: revGrh[i])
+                indgre[x]++;
+        
+        queue<int> q;
         vector<int> res;
         
-        for(int i=0; i<v; i++) {
-            if(graph[i].size() == 0)
-                safe[i] = 1;
-        }
+        for(int i=0; i<V; i++)
+            if(indgre[i] == 0)
+                q.push(i);
         
-        for(int i=0; i<v; i++) {
-            if(vis[i] == 0) {
-                dfs(i,graph,vis,pvis,safe);
+        while(!q.empty()) {
+            int x = q.front();
+            q.pop();
+            res.push_back(x);
+            for(int i : revGrh[x]) {
+                indgre[i]--;
+                if(indgre[i] == 0)
+                    q.push(i);
             }
         }
-        for(int i=0; i<v; i++) {
-            if(safe[i] == 1)
-                res.push_back(i);
-        }
+        
+        sort(res.begin(), res.end());
         return res;
+        
     }
 };
