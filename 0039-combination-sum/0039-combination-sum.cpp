@@ -9,9 +9,9 @@ public:
         else {
             for(int i=ind; i<nums.size(); i++) {
                 temp.push_back(nums[i]);
-                target -= nums[i];
-                dfs(nums,target,ans,temp,i);
-                target += nums[i];
+                // target -= nums[i];
+                dfs(nums,target-nums[i],ans,temp,i);
+                // target += nums[i];
                 temp.pop_back();
             }
         }
