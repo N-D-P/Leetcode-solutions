@@ -14,12 +14,6 @@ public:
         ListNode *curr = head;
         ListNode *prev = head;
         ListNode *pprev = head;
-        if(curr->next == nullptr) {
-            if(n == 0)
-                return curr;
-            else if(n == 1)
-                return curr->next;
-        }
         
         while(n--) {
             curr = curr->next;
@@ -33,6 +27,7 @@ public:
             prev = prev->next;
             curr = curr->next;
         }
+        
         pprev->next = prev->next;
         return head;
     }
