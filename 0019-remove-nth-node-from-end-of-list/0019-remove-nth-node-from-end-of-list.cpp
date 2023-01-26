@@ -20,17 +20,19 @@ public:
             else if(n == 1)
                 return curr->next;
         }
+        
         while(n--) {
             curr = curr->next;
         }
+        
         if(curr == nullptr)
-            head = head->next;
+            return head->next;
+        
         while(curr) {
             pprev = prev;
             prev = prev->next;
             curr = curr->next;
         }
-        cout<<pprev->val;
         pprev->next = prev->next;
         return head;
     }
