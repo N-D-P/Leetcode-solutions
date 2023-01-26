@@ -10,8 +10,10 @@ public:
         if(ind == nums.size())
             return;
         temp.push_back(nums[ind]);
-        dfs(nums,target-nums[ind],ans,temp,ind);
+        target -= nums[ind];
+        dfs(nums,target,ans,temp,ind);
         temp.pop_back();
+        target += nums[ind];
         dfs(nums,target,ans,temp,ind+1);
 
     }
