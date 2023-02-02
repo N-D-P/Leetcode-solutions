@@ -18,11 +18,7 @@ class Solution {
         for(int i=0; i<edges.size(); i++) {
             adj[edges[i][0]].push_back({edges[i][1],edges[i][2]});
         }
-        
-        for(int i=0; i<N; i++) 
-            for(auto x : adj[i])
-                indeg[x.first]++;
-        
+
         ans[0] = 0;
         
         q.push(0);
@@ -31,10 +27,8 @@ class Solution {
             int topEle = q.front();
             q.pop();
             for(auto i : adj[topEle]) {
-                indeg[i.first]--;
                 ans[i.first] = min(ans[i.first], ans[topEle]+i.second);
-                // if(indeg[i.first] == 0)
-                 q.push(i.first);
+                q.push(i.first);
             }
             
         }
