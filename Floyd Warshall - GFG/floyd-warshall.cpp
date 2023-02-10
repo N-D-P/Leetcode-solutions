@@ -23,7 +23,13 @@ class Solution {
 	            for(int j=0; j<n; j++) 
 	                matrix[i][j] = min(matrix[i][j], matrix[i][via] + matrix[via][j]);
 	            
-	                
+	    //For detecting a negative cycle using this algo
+	    /*
+	        for(int i=0; i<n; i++)
+	            if(matric[i][i] < 0)
+	                cout<<"There is a negative cycle";
+	    */
+	    //If you reaching at a element less then zero then it has negative cycle
 	    
 	    
 	    
