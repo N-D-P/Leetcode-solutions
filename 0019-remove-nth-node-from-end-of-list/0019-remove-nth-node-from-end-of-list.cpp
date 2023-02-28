@@ -16,12 +16,15 @@ public:
         
         if(head == nullptr or head->next == nullptr)
             return nullptr;
+        
         while(n) {
             curr = curr->next;
             n--;
         }
+        
         if(!curr)
             return head->next;
+        
         while(curr->next != nullptr) {
             curr = curr->next;
             curr2 = curr2->next;
