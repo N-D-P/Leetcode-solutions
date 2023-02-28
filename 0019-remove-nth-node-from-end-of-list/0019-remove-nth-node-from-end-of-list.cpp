@@ -22,12 +22,12 @@ public:
         }
         if(!curr)
             return head->next;
-        while(curr != nullptr) {
+        while(curr->next != nullptr) {
             curr = curr->next;
             prev = curr2;
             curr2 = curr2->next;
         }
-        prev->next = curr2->next;
+        curr2->next = curr2->next->next;
         return head;
     }
 };
