@@ -23,7 +23,6 @@ public:
         slow = head;
         
         while(curr) {
-            // cout<<curr->val<<" "<<slo->val;
             if(curr->val != slo->val)
                 return false;
             curr = curr->next;
