@@ -11,34 +11,25 @@
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-        if(head == nullptr)
-            return head;
-        int size = 0;
-        ListNode* curr = head;
-        while(curr != nullptr) {
-            curr=curr->next;
-            size++;
-        }
-        k = k%size;
+        if(!head) return head;
         
-        if(k == 0)
-            return head;
+        int len=1; // number of nodes
+        ListNode *newH, *tail;
+        newH=tail=head;
         
-        int k_ = size-k;
-        curr = head;
-        while(k_!=1) {
-            curr=curr->next;
-            k_--;
+        while(tail->next)  // get the number of nodes in the list
+        {
+            tail = tail->next;
+            len++;
         }
-        ListNode *newHead = curr->next;
-        ListNode *curr1 = curr->next;
-        curr->next = nullptr;
-        while(k!=1) {
-            cout<<curr1->val;
-            curr1=curr1->next;
-            k--;
+        tail->next = head; // circle the link
+
+        if(k %= len) 
+        {
+            for(auto i=0; i<len-k; i++) tail = tail->next; // the tail node is the (len-k)-th node (1st node is head)
         }
-        curr1->next = head;
-        return newHead;
+        newH = tail->next; 
+        tail->next = NULL;
+        return newH;
     }
 };
