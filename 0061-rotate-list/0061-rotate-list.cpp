@@ -22,7 +22,7 @@ public:
          q->next = head;
          k = k % len;
          k = len - k;
-         int j = 1;
+
          while(k!=1){
              p = p->next;
              k--;
