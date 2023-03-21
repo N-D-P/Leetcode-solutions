@@ -12,8 +12,8 @@ public:
                 cnt = 0;
             }
         }
-        ans += (cnt * (cnt + 1))/2;
-        cout<<cnt<<" "<<ans<<endl;
+        if(cnt!=0)
+            ans += (cnt * (cnt + 1))/2;
         
         return ans;
     }
